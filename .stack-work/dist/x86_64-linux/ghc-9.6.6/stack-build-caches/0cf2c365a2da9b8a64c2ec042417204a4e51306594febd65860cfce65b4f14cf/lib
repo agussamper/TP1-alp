@@ -1,0 +1,28 @@
+/home/agus/.ghcup/ghc/9.6.6/lib/ghc-9.6.6/lib/x86_64-linux-ghc-9.6.6/rts-1.0.2/include/ghcversion.h:
+  hash: 9032f6afc97dcddfe8c8b306639eb6f456e3f6667f3dd8268681f51bb77c8634
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/.stack-work/dist/x86_64-linux/ghc-9.6.6/build/autogen/Paths_TP1.hs:
+  hash: 2dc678a760d9e1b623694d1ecae9ac69e63549713fd2abbbdd5c4ee3e7847c27
+? /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/.stack-work/dist/x86_64-linux/ghc-9.6.6/build/autogen/cabal_macros.h
+: hash: a6eef655f6c2c3f80d708b0ad97f768ae27887f86a43072b425c2296a74fbee8
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/CHANGELOG.md:
+  hash: 4d3313936a46bb30918048b369fb6aa8d4103afefb7b7a48ffbfb0d9806f3d6b
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/README.md:
+  hash: 8c50b647de6f8d234b50e47ecee815c185818dff55a5323a08828dd22c247648
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/TP1.cabal:
+  hash: f15ad80637afff84b758a1e961622e513ea5e72203ddb625d63af412671e7ac2
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/package.yaml:
+  hash: 8f10c45f5cc8350b81b12753a629ffde2dbf8f9eb1eb715011e140e977b581d9
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/AST.hs:
+  hash: 3b56165d34cadd2600aa5e3a0f0b963fe03112b83c5a43b7f677a645b27a54d8
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval1.hs:
+  hash: 503f3de110316a34a2740e00a53772f8af5c575bbfb51a421d4ae2325957c3e8
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval2.hs:
+  hash: c10cef9b0b1a3fbd19af7bf675c307351b89f38de7b340fea7d58ee722714c03
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval3.hs:
+  hash: f930f51958a9c3831a784d118e349ff65ba7eed57ced56a13410521284ac85ef
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/PPLis.hs:
+  hash: 2784405814952f2d1af05d96869417fd297fb591534e63fc47638334759cb917
+/home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Parser.hs:
+  hash: 4b7629068254fa1c894858b047cfa286c9b23c292b12a7d66617f91a26c9b53a
+/usr/include/stdc-predef.h:
+  hash: cb08cd5d4cc059a90833ac48a284d25016e8d56ded8ad4cd98d8ac59cc5053f3

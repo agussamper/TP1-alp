@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{proof}
+
+\begin{document}
+
+
+\section*{Ejercicio 5}
+
+Vamos a probar que si \(\langle c_0, \sigma_0 \rangle \rightsquigarrow
+ \langle c_1, \sigma_1 \rangle \) y \(\langle c_0, \sigma_0 \rangle \rightsquigarrow
+ \langle c_2, \sigma_2 \rangle \) entonces  \(\langle c_1, \sigma_1 \rangle = \langle c_2, \sigma_2 \rangle \)\\
+ 
+ Hacemos inducción sobre \(\langle c_0, \sigma_0 \rangle \rightsquigarrow
+ \langle c_1, \sigma_1 \rangle \)\\
+ \textbf{Casos base}\\
+ 
+Si la última regla utilizada es \textit{(ASS)} entonces \(c_0\) es de la forma \(\ v = e \) y solo se le puede aplicar la regla \textit{(ASS)}.\\
+Si tenemos que \(\ \langle v = e, \sigma_0 \rangle \rightsquigarrow
+\langle \textbf{skip}, [ \sigma_1 \mid v : n_1 ] \rangle\)  y que \(\ \langle  v = e, \sigma_0 \rangle \rightsquigarrow
+\langle \textbf{skip}, [ \sigma_2 \mid v : n_2 ] \rangle\), luego de aplicar \textit{(ASS)}, tenemos que\\
+\[\langle e, \sigma \rangle \Downarrow_{\text{exp}} \langle n_1, \sigma_1 \rangle\] y que \[\langle e, \sigma \rangle \Downarrow_{\text{exp}} \langle n_2, \sigma_2 \rangle\]\\
+Como \(\Downarrow_{\text{exp}}\) es determinista \(\langle n_1, \sigma_1 \rangle = \langle n_2, \sigma_2 \rangle\)  y por lo tanto \[\langle \textbf{skip}, [ \sigma_1 \mid v : n_1 ] \rangle= \langle \textbf{skip}, [ \sigma_2 \mid v : n_2 ] \rangle\]\\
+
+Si la última regla utilizada es \textit{(IF1)} entonces \(c_0\) es la forma \textbf{if} b \textbf{then} \(c_{00}\) \textbf{else} \(c_{01}\)  y  \( \langle b, \sigma \rangle  \Downarrow_{\text{exp}} \langle \textbf{true}, \sigma' \rangle\) \\
+Como \(\Downarrow_{\text{exp}}\) es determinista, siempre \( \langle b, \sigma \rangle  \Downarrow_{\text{exp}} \langle \textbf{true}, \sigma' \rangle\)\\
+Por lo tanto si tenemos que
+\[ \langle \textbf{if } b\textbf{ then } c_{00} \textbf{ else } c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_1, \sigma_1 \rangle\]
+por haber aplicado \textit{(IF1)}, entonces si
+\[ \langle \textbf{if } b\textbf{ then } c_{00} \textbf{ else } c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_2, \sigma_2 \rangle\]
+también se le aplicó \textit{(IF1)} y \[ \langle c_{00}, \sigma'\rangle = \langle c_1, \sigma_1 \rangle = \langle c_2, \sigma_2 \rangle\]\\
+
+Si la última regla utilizada es \textit{(IF2)} entonces \(c_0\) es la forma \textbf{if} b \textbf{then} \(c_{00}\) \textbf{else} \(c_{01}\)  y  \( \langle b, \sigma \rangle  \Downarrow_{\text{exp}} \langle \textbf{false}, \sigma' \rangle\) \\
+Como \(\Downarrow_{\text{exp}}\) es determinista, siempre \( \langle b, \sigma \rangle  \Downarrow_{\text{exp}} \langle \textbf{false}, \sigma' \rangle\)\\
+Por lo tanto si tenemos que
+\[ \langle \textbf{if } b\textbf{ then } c_{00} \textbf{ else } c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_1, \sigma_1 \rangle\]
+por haber aplicado \textit{(IF2)}, entonces si
+\[ \langle \textbf{if } b\textbf{ then } c_{00} \textbf{ else } c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_2, \sigma_2 \rangle\]
+también se le aplicó \textit{(IF2)} y \[ \langle c_{01}, \sigma'\rangle = \langle c_1, \sigma_1 \rangle = \langle c_2, \sigma_2 \rangle\]\\
+
+Si la última regla utilizada es \textit{(REPEAT)} entonces \(c_0\) es de la forma \textbf{repeat} c \textbf{untill} b\\
+A \(c_0\) solo se le puede aplicar la regla \textit{(REPEAT)} y si:
+\[ \langle \textbf{repeat } c \textbf{ until } b,\sigma\rangle \rightsquigarrow  \langle c_1, \sigma_1\rangle\]
+\[ \langle \textbf{repeat } c \textbf{ until } b,\sigma\rangle \rightsquigarrow  \langle c_2, \sigma_2\rangle\]
+Entonces
+
+\[\langle c;\textbf{if } b \textbf{ then skip else repeat } c \textbf{ until } b, \sigma'\rangle = \langle c_1, \sigma_1\rangle = \langle c_2, \sigma_2\rangle\]\\
+
+
+Si la última regla utilizada es \textit{(SEQ1)} entonces \(c_0 = \textbf{skip};c_{01}\) y solo se le puede aplicar la regla \textit{(SEQ1)} porque  \textbf{skip} no deriva a un termino.
+Si  
+\[\langle \textbf{skip};c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_{11}, \sigma_1  \rangle \] y 
+\[\langle \textbf{skip};c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_{21}, \sigma_2 \rangle  \]
+Entonces por \textit{(SEQ1)}\\
+\[\langle c_{01}, \sigma_0 \rangle = \langle c_{11}, \sigma_1 \rangle = c_{21} , \sigma_2 \rangle\]\\
+ \textbf{Paso inductivo}\\
+Si la última regla utilizada fue \textit{(SEQ2)} entonces tenemos que \(c_0 = c_{00};c_{01}\) y la única regla que se le puede aplicar es \textit{(SEQ2)}. Si luego de utiliza \textit{(SEQ2)} tenemos que
+\[\langle c_{00};c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_{10};c_{11},\sigma_1 \rangle  \] y que
+\[\langle c_{00};c_{01}, \sigma_0 \rangle \rightsquigarrow \langle c_{20} ; c_{21},\sigma_2 \rangle  \]
+Tendremos que 
+\[\langle c_{00}, \sigma_0 \rangle \rightsquigarrow \langle c_{10}, \sigma_1 \rangle\] y
+\[\langle c_{00}, \sigma_0 \rangle \rightsquigarrow \langle c_{20}, \sigma_2 \rangle\] 
+Por Hipotesís Inductiva
+\[\langle c_{10}, \sigma_1 \rangle = \langle c_{20}, \sigma_2 \rangle \]
+Luego por \textit{(SEQ2)}
+\[c_{01} = c_{11} = c_{21}\]
+Por lo tanto
+\[ \langle c_{10};c_{11}, \sigma_1 \rangle = \langle c_{20};c_{21}, \sigma_2\rangle\]\\
+
+Queda demostrado el deterinismo de \(\rightsquigarrow\).
+
+
+\section*{Ejercicio 6}
+
+\[
+\infer[(\text{PLUS})]
+      { \langle x+1, \sigma \rangle \Downarrow_{\text{exp}} \langle x\textbf{+1}, \sigma' \rangle }
+      {
+      \infer[(\textit{VAR})]
+      { \langle x, \sigma \rangle \Downarrow_{\text{exp}} \langle \sigma \ x, \sigma \rangle }
+      { x \in dom \ \sigma }
+      & 
+      \infer[(\textit{NVAL})]
+      { \langle 1, \sigma' \rangle \Downarrow_{\text{exp}} \langle \textbf{1}, \sigma' \rangle }
+      }
+\]
+
+\[
+\infer[(\textit{ASS})]
+      { \langle y, \sigma' \rangle \rightsquigarrow   \langle \textbf{skip}, [ \sigma' \mid y : \textbf{x+1} ] \rangle }
+      {
+      \infer[(\textit{VAL})]{ \langle y, \sigma' \rangle \Downarrow_{\text{exp}} \langle \textbf{x+1}, \sigma'\rangle}
+      {x+1 \in dom \ \sigma'}
+}  
+\]
+
+
+
+
+
+
+
+
+\end{document}
+

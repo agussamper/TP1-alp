@@ -19,15 +19,14 @@ initState = M.empty
 -- Busca el valor de una variable en un estado
 -- Completar la definición
 lookfor :: Variable -> State -> Int
-lookfor w [] = 0
 lookfor w ((x, n) : s) | (w == x) = n
                        | otherwise = lookfor w s
 
 -- Cambia el valor de una variable en un estado
 -- Completar la definición
 update :: Variable -> Int -> State -> State
-update w n ((x, y) : s) =  | (w == x) = (x, n) : s
-                           | otherwise = (x, y) : (update w n s)
+update w n ((x, y) : s) | (w == x) = (x, n) : s
+                        | otherwise = (x, y) : (update w n s)
 
 -- Evalúa un programa en el estado vacío
 eval :: Comm -> State
@@ -47,10 +46,10 @@ stepComm (Let x n) s     = (Skip !:! update x n s)
 stepComm (Seq Skip c) s  = (c2 !:! s) 
 stepComm (Seq c0 c1) s   = ((Seq c0' c1) !:! s')
                         where
-                          (c0',s') = stepComm c0 s
+                          (c0' !:! s') = stepComm c0 s
 stepComm (IfThenElse b c0 c1) s = case evalExp b s of
-                                      (BTrue, s')  -> (c0 !:! s')
-                                      (BFalse, s') -> (c1 !:! s')
+                                      (True !:! s')  -> (c0 !:! s')
+                                      (False !:! s') -> (c1 !:! s')
 stepComm RepeatUntil c b = (Seq c (IfThenElse b Skip (RepeatUntil c b)) !:! s)
 
 -- Evalúa una expresión
@@ -73,8 +72,8 @@ evalExp expr s = let (n0 !:! s')  = evalExp e0 s
 evalExp BTrue s = (True !:! s)
 evalExp BFalse s = (False !:! s)
 evalExp (Not p) s = case evalExp p s of
-                         (True, s')  -> (False !:! s')
-                         (False, s') -> (True !:! s')
+                         (True !:! s')  -> (False !:! s')
+                         (False !:! s') -> (True !:! s')
 evalExp expr = let (b0 !:! s')  = evalExp p1 s
                    (b1 !:! s'') = evalExp p0 s'
                  in case expr of

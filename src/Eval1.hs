@@ -41,8 +41,7 @@ stepCommStar c    s = Data.Strict.Tuple.uncurry stepCommStar $ stepComm c s
 -- Completar la definición
 stepComm :: Comm -> State -> Pair Comm State
 stepComm Skip s          = (Skip :!: s)  
-stepComm (Let x n) s     = let (n' :!: s') = evalExp n s
-                           in (Skip :!: update x n' s')
+stepComm (Let x n) s     =  (Skip :!: M.insert x n s)
 stepComm (Seq Skip c) s  = (c :!: s) 
 stepComm (Seq c0 c1) s   = let (c0' :!: s') = stepComm c0 s
                            in ((Seq c0' c1) :!: s')

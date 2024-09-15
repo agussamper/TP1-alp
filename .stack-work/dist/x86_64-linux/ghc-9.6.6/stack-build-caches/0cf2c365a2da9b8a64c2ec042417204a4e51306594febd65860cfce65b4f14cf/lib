@@ -9,17 +9,17 @@
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/README.md:
   hash: 8c50b647de6f8d234b50e47ecee815c185818dff55a5323a08828dd22c247648
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/TP1.cabal:
-  hash: f15ad80637afff84b758a1e961622e513ea5e72203ddb625d63af412671e7ac2
+  hash: 6431991bec85ecb4b96c1d81dfa6f0f3fda6f3492d9b1d4aaa612e30391e564a
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/package.yaml:
   hash: 8f10c45f5cc8350b81b12753a629ffde2dbf8f9eb1eb715011e140e977b581d9
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/AST.hs:
   hash: 3b56165d34cadd2600aa5e3a0f0b963fe03112b83c5a43b7f677a645b27a54d8
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval1.hs:
-  hash: 503f3de110316a34a2740e00a53772f8af5c575bbfb51a421d4ae2325957c3e8
+  hash: cd066f1ca890051cbc9c8eadc870f1c12c5eba233926b9d1dbdc7bdc4be9d673
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval2.hs:
-  hash: c10cef9b0b1a3fbd19af7bf675c307351b89f38de7b340fea7d58ee722714c03
+  hash: 9286a6f8bd7cf3e4f4acd2d301e6ee9e15a5cc4dc7ffa20c8a6a2f237dd581da
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Eval3.hs:
-  hash: f930f51958a9c3831a784d118e349ff65ba7eed57ced56a13410521284ac85ef
+  hash: d230d90cad1479f5bccb5e860a9787bc1042641aaea30cc0da5092d35dcd1475
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/PPLis.hs:
   hash: 2784405814952f2d1af05d96869417fd297fb591534e63fc47638334759cb917
 /home/agus/Documents/Facultad/3rd year/alp/2024-enunciado/TP1/src/Parser.hs:

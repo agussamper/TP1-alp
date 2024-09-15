@@ -100,18 +100,7 @@ evalExpInt (VarDec x) s = do
 evalExpInt (UMinus e) s = do
                       (n :!: s') <- evalExp e s
                       return (-n :!: s')
-evalExpInt (Plus  e0 e1) s = do 
-                            n <- evalOpp (+)   e0 e1 s
-                            return n
-evalExpInt (Minus e0 e1) s = do 
-                            n <- evalOpp (-)   e0 e1 s
-                            return n
-evalExpInt (Times e0 e1) s = do 
-                            n <- evalOpp (*)   e0 e1 s
-                            return n
-evalExpInt (Div   e0 e1) s = do 
-                            n <- evalOpp (div) e0 e1 s
-                            return n
+evalExpInt expr s = do evalOpp expr s
 
 evalExpBool::Exp Bool -> State -> Either Error (Pair Bool State)
 evalExpBool BTrue  s = Right (True  :!: s)
@@ -129,17 +118,24 @@ evalExpBool (Eq e0 e1)  s = evalComp (==) e0 e1 s
 evalExpBool (NEq e0 e1) s = evalComp (/=) e0 e1 s
 
 
-evalOpp :: (Int -> Int -> Int) -> Exp Int -> Exp Int -> State -> Either Error (Pair Int State)
-evalOpp div e0 e1 s = do
-                    (n0 :!: s')  <- evalExpInt e0 s
-                    (n1 :!: s'') <- evalExpInt e1 s'
-                    if n1 == 0 then (Left DivByZero)
-                    else return (div n0 n1 :!: s'')
-evalOpp op e0 e1 s = do
-                  (n0 :!: s') <- evalExpInt e0 s
-                  (n1 :!: s'') <- evalExpInt e1 s'
-                  return (op n0 n1 :!: s'')
+evalOpp :: Exp Int -> State -> Either Error (Pair Int State)
+evalOpp (Div x y) s = 
+  do
+    (n0 :!: s')  <- evalExpInt x s
+    (n1 :!: s'') <- evalExpInt y s'
+    if n1 == 0 then Left DivByZero
+    else return (div n0 n1 :!: s'')
+evalOpp expri s =
+  let (op, x, y) = getOp expri in
+  do
+    (n0 :!: s') <- evalExpInt x s
+    (n1 :!: s'') <- evalExpInt y s'
+    return (op n0 n1 :!: s'')
 
+getOp :: Exp Int -> (Int -> Int -> Int,Exp Int,Exp Int)
+getOp (Times x y) =  ((*),x,y)
+getOp (Minus x y) = ((-),x,y)
+getOp (Plus x y) = ((+),x,y)
 
 evalLog :: (Bool -> Bool -> Bool) -> Exp Bool -> Exp Bool -> State -> Either Error (Pair Bool State)
 evalLog op p0 p1 s = do 

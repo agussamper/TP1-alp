@@ -45,7 +45,9 @@ stepCommStar c    s = do
 -- Completar la definición
 stepComm :: Comm -> State -> Either Error (Pair Comm State)
 stepComm Skip s          = Right (Skip :!: s)  
-stepComm (Let x n) s     =  (Skip :!: M.insert x n s)
+stepComm (Let x e) s     = do 
+                      (n :!: s') <- evalExp e s 
+                      return (Skip :!: M.insert x n s')
 stepComm (Seq Skip c) s  = Right (c :!: s) 
 stepComm (Seq c0 c1) s   = do 
                         (c0' :!: s') <- stepComm c0 s

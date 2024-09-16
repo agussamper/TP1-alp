@@ -29,8 +29,12 @@ update :: Variable -> Int -> State -> State
 update x n s = M.adjust (\i->n) x s
 
 -- Evalúa un programa en el estado vacío
-eval :: Comm -> Either (Error, String) (State, String)
-eval p = stepCommStar p initState ""
+eval :: Comm -> String
+eval p = 
+    let result = stepCommStar p initState ""
+    in case result of
+         Left (err, t) -> t
+         Right (s, t)  ->t
 
 -- Evalúa múltiples pasos de un comnado en un estado,
 -- hasta alcanzar un Skip

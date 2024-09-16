@@ -2,10 +2,6 @@ x = 1;
 y = 28;
 z = 10 + 25;
 repeat {
-    x = x + 1
+    x = x++
 } until x == y;
-if (x < z) {x=x-1} else {x=x+1};
-repeat {
-    y = y-1;
-    x = z / y
-} until x > z
+if (x < z) {x=x-1} else {x=x+1}

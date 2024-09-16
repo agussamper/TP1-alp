@@ -57,8 +57,8 @@ stepComm (IfThenElse b c0 c1) s = do
                                 if b' then return (c0 :!: s')
                                 else return (c1 :!: s')
 stepComm (RepeatUntil c b) s = do
-                            let c1 = IfThenElse b Skip (RepeatUntil c b)
-                            return ((Seq c c1) :!: s)
+                            (c1 :!: s')<- stepComm (IfThenElse b Skip (RepeatUntil c b)) s
+                            return ((Seq c c1) :!: s')
 
 -- Evalúa una expresión
 -- Completar la definición

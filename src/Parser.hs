@@ -159,7 +159,7 @@ boolexp = chainl1 parseWithinOr
 
 parseSkip :: Parser Comm
 parseSkip =
-  do reserved lis "Skip"
+  do reserved lis "skip"
      return Skip
 
 parseLet :: Parser Comm

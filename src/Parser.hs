@@ -182,6 +182,15 @@ parseIfThenElse =
      reservedOp lis "}"
      return (IfThenElse bexp com1 com2)
 
+parseIfThen :: Parser Comm
+parseIfThen =
+  do reserved lis "if"
+     bexp <- boolexp
+     reservedOp lis "{"
+     com1 <- comm
+     reservedOp lis "}"
+     return (IfThen bexp com1)
+
 parseRep :: Parser Comm
 parseRep = 
   do reserved lis "repeat"
@@ -195,6 +204,7 @@ parseRep =
 comm1 :: Parser Comm
 comm1 = (try parseSkip)
       <|> (try parseLet)
+      <|> (try parseIfThen)
       <|> (try parseIfThenElse)
       <|> (parseRep)
 

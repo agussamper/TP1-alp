@@ -27,7 +27,6 @@ data Exp a where
   Not    :: Exp Bool -> Exp Bool
   Eq     :: Exp Int -> Exp Int -> Exp Bool
   NEq    :: Exp Int -> Exp Int -> Exp Bool
-  -- //TODO: agregar ++ y --  
 
 deriving instance Show (Exp a)
 deriving instance Eq (Exp a)

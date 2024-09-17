@@ -204,8 +204,8 @@ parseRep =
 comm1 :: Parser Comm
 comm1 = (try parseSkip)
       <|> (try parseLet)
-      <|> (try parseIfThen)
       <|> (try parseIfThenElse)
+      <|> (try parseIfThen)
       <|> (parseRep)
 
 parseSeq = do { reservedOp lis ";"; return Seq }

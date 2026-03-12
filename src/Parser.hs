@@ -137,9 +137,9 @@ parseComparision =
 
 parseNot :: Parser (Exp Bool)
 parseNot = do reservedOp lis "!"
-              x <- boolexp
+              x <- parens lis boolexp
+                <|> parseBoolVal
               return (Not x)
-
 
 parseWithinAnd :: Parser (Exp Bool)
 parseWithinAnd = (try parseBoolVal)

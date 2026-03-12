@@ -82,7 +82,9 @@ parseVarDec =
 parseUMinus :: Parser (Exp Int)
 parseUMinus = 
   do reservedOp lis "-"
-     e <- (try parseNat) <|> intexp
+     e <- parseNat
+        <|> parseVar
+        <|> parens lis intexp
      return (UMinus e)
 
 -- Parser de números naturales

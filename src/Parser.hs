@@ -57,26 +57,19 @@ parseFactSymbol =
   do { reservedOp lis "*"; return Times }
   <|> do { reservedOp lis "/"; return Div } 
 
+parseVarOrMod :: Parser (Exp Int)
+parseVarOrMod = do
+  v <- identifier lis
+  (reservedOp lis "++" >> return (VarInc v))
+    <|> (reservedOp lis "--" >> return (VarDec v))
+    <|> return (Var v)
+
 -- parseVar se construye un parser
 -- con la clasificacion de palabras clave
 parseVar :: Parser (Exp Int)
-parseVar = 
+parseVar =
   do v <- identifier lis
      return (Var v)
-
--- Parser de variables incrementadas en 1
-parseVarInc :: Parser (Exp Int)
-parseVarInc =
-  do varName <- identifier lis
-     reservedOp lis "++"
-     return (VarInc varName) 
-
--- Parser de variable decrementadas en 1
-parseVarDec :: Parser (Exp Int)
-parseVarDec =
-  do varName <- identifier lis
-     reservedOp lis "--"
-     return (VarDec varName) 
 
 -- Parser de números enteros negativos
 parseUMinus :: Parser (Exp Int)
@@ -94,11 +87,9 @@ parseNat =
      return (Const (fromIntegral n))
 
 atom :: Parser (Exp Int)
-atom = try parseVarInc
-       <|> try parseVarDec
-       <|> try parseUMinus
-       <|> try parseVar
-       <|> try parseNat
+atom = parseVarOrMod
+       <|> parseUMinus   
+       <|> parseNat       
        <|> parens lis intexp
 
 parseTerm :: Parser (Exp Int)
@@ -142,10 +133,10 @@ parseNot = do reservedOp lis "!"
               return (Not x)
 
 parseWithinAnd :: Parser (Exp Bool)
-parseWithinAnd = (try parseBoolVal)
-                <|> (try parseNot)
-                <|> (try parseComparision)
-                <|> (parens lis boolexp)
+parseWithinAnd = parseBoolVal
+                <|> parseNot
+                <|> parseComparision
+                <|> parens lis boolexp
 
 parseWithinOr :: Parser (Exp Bool)
 parseWithinOr = chainl1 parseWithinAnd
@@ -171,27 +162,20 @@ parseLet =
      iexp <- intexp
      return (Let varName iexp)
 
-parseIfThenElse :: Parser Comm
-parseIfThenElse =
-  do reserved lis "if"
-     bexp <- boolexp
-     reservedOp lis "{"
-     com1 <- comm
-     reservedOp lis "}"
-     reserved lis "else"
-     reservedOp lis "{"
-     com2 <- comm
-     reservedOp lis "}"
-     return (IfThenElse bexp com1 com2)
+parseIf :: Parser Comm
+parseIf = do
+  reserved lis "if"
+  cond <- boolexp
+  reservedOp lis "{"
+  c1 <- comm
+  reservedOp lis "}"
+  ((do reserved lis "else"
+       reservedOp lis "{"
+       c2 <- comm
+       reservedOp lis "}"
+       return (IfThenElse cond c1 c2))
+    <|> return (IfThen cond c1))
 
-parseIfThen :: Parser Comm
-parseIfThen =
-  do reserved lis "if"
-     bexp <- boolexp
-     reservedOp lis "{"
-     com1 <- comm
-     reservedOp lis "}"
-     return (IfThen bexp com1)
 
 parseRep :: Parser Comm
 parseRep = 
@@ -204,11 +188,10 @@ parseRep =
      return (RepeatUntil c cond)
 
 comm1 :: Parser Comm
-comm1 = (try parseSkip)
-      <|> (try parseLet)
-      <|> (try parseIfThenElse)
-      <|> (try parseIfThen)
-      <|> (parseRep)
+comm1 = parseSkip      
+      <|> parseIf
+      <|> parseRep
+      <|> parseLet
 
 parseSeq = do { reservedOp lis ";"; return Seq }
 

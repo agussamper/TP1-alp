@@ -56,9 +56,6 @@ stepComm (IfThenElse b c0 c1) s =
   do (b' :!: s') <- evalExp b s 
      if b' then return (c0 :!: s')
      else return (c1 :!: s')
-stepComm (RepeatUntil c b) s = 
-  do (c1 :!: s')<- stepComm (IfThenElse b Skip (RepeatUntil c b)) s
-     return ((Seq c c1) :!: s')
 stepComm (Seq c0 c1) s   = 
   do (c0' :!: s') <- stepComm c0 s
      return ((Seq c0' c1) :!: s')
